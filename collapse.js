@@ -82,8 +82,8 @@ function setHeader(n) { //Create new <div class="header"> element, adding button
      */
     header[n][0].innerHTML =
 
-    // &nbsp; <a style="cursor: pointer; cursor: hand;" onclick="toggleThread(
-    "&nbsp;<a style=\"cursor: pointer; cursor: hand;\" onClick = \"toggleThread(".concat(
+        // &nbsp; <a style="cursor: pointer; cursor: hand;" onclick="toggleThread(
+        "&nbsp;<a style=\"cursor: pointer; cursor: hand;\" onClick = \"toggleThread(".concat(
 
         //The number of the comment to be toggled
         n.toString(),
