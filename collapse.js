@@ -9,25 +9,24 @@ var header_innerHTML_orig = Array();
 button_hide = "[-]"
 button_show = "[+]"
 
-function initCollapse() {
 
-    //Get an array of the comments
-    comments = document.getElementById("comments").getElementsByClassName("comment");
 
-    //Iterate through the array of comments
-    for (i = 0; i < comments.length; i++) {
-        comment = comments[i];
+//Get an array of the comments
+comments = document.getElementById("comments").getElementsByClassName("comment");
 
-        //Initially set thread not hidden
-        hidden[i] = false;
+//Iterate through the array of comments
+for (i = 0; i < comments.length; i++) {
+    comment = comments[i];
 
-        //Creating the new header;
-        header[i] = comment.getElementsByClassName("submitted");
-        header_innerHTML_orig[i] = header[i][0].innerHTML;
+    //Initially set thread not hidden
+    hidden[i] = false;
 
-        //Add default button to all comments
-        setHeader(i);
-    }
+    //Creating the new header;
+    header[i] = comment.getElementsByClassName("submitted");
+    header_innerHTML_orig[i] = header[i][0].innerHTML;
+
+    //Add default button to all comments
+    setHeader(i);
 }
 
 function toggleThread(n) {
@@ -44,7 +43,7 @@ function toggleThread(n) {
         display = "none";
     }
 
-    //Show hidden parts of the comment
+    //Toggle parts of the comment
     comments[n].getElementsByClassName("content")[0].style.display = display;
     comments[n].getElementsByClassName("link")[0].style.display = display;
 
@@ -58,18 +57,18 @@ function toggleThread(n) {
 
     /*
      *If the next element has the "indented" class attribute, it means it's a container div for the child comments (answers) of the current comment
-     *Therefore if the next element is "indented", show that, too
+     *Therefore if there is a next element and it is "indented", show/hide that, too
+     *
      */
-    if (next_sibling.className == "indented") {
+    if (next_sibling && next_sibling.className == "indented") {
         next_sibling.style.display = display;
-    }
+    } else {}
 
     //Change the header of the comment
     setHeader(n);
 }
 
 function setHeader(n) { //Create new <div class="header"> element, adding button plus the original.
-
     //Set button type
     if (hidden[n])
         button_type = button_show;
@@ -82,8 +81,8 @@ function setHeader(n) { //Create new <div class="header"> element, adding button
      */
     header[n][0].innerHTML =
 
-        // &nbsp; <a style="cursor: pointer; cursor: hand;" onclick="toggleThread(
-        "&nbsp;<a style=\"cursor: pointer; cursor: hand;\" onClick = \"toggleThread(".concat(
+    	// &nbsp; <a style="cursor: pointer; cursor: hand;" onclick="toggleThread(
+    	"&nbsp;<a style=\"cursor: pointer; cursor: hand;\" onClick = \"toggleThread(".concat(
 
         //The number of the comment to be toggled
         n.toString(),
