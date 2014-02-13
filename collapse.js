@@ -51,7 +51,7 @@ function toggleThread(n) {
     //Get next element on the same DOM level
     var next_sibling = comments[n].nextSibling;
 
-    //some browsers take whitespaces as next text elements - eliminate it with the following while
+    //Some browsers take whitespaces as next text elements - eliminate it with the following while
     while (next_sibling && next_sibling.nodeType != 1) {
         next_sibling = next_sibling.nextSibling;
     }
@@ -70,15 +70,31 @@ function toggleThread(n) {
 
 function setHeader(n) { //Create new <div class="header"> element, adding button plus the original.
 
+    //Set button type
     if (hidden[n])
         button_type = button_show;
     else
         button_type = button_hide;
 
-    header[n][0].innerHTML = "&nbsp;<a style=\"cursor: pointer; cursor: hand;\" onClick = \"toggleThread(".concat(
+    /*
+     *Assemblying the new comment header, eg.:
+     * &nbsp; <a style="cursor: pointer; cursor: hand;" onclick="toggleThread(0);">[-]</a>
+     */
+    header[n][0].innerHTML =
+
+    // &nbsp; <a style="cursor: pointer; cursor: hand;" onclick="toggleThread(
+    "&nbsp;<a style=\"cursor: pointer; cursor: hand;\" onClick = \"toggleThread(".concat(
+
+        //The number of the comment to be toggled
         n.toString(),
+
         ");\">",
+
+        // [-] or [+]
         button_type,
+
         "</a>",
+
+        //the rest of the header
         header_innerHTML_orig[n]);
 }
