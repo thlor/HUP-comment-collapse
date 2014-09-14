@@ -1,32 +1,37 @@
-var comments;
+//Run script only once
+if(typeof collapser_activated === 'undefined') {
+  var comments;
 
-//Array of booleans, which comment is hidden, which isn't
-var hidden = Array();
+  //Array of booleans, which comment is hidden, which isn't
+  var hidden = Array();
 
-var header = Array();
-var header_innerHTML_orig = Array();
+  var header = Array();
+  var header_innerHTML_orig = Array();
 
-button_hide = "[-]"
-button_show = "[+]"
+  button_hide = "[-]"
+  button_show = "[+]"
 
 
 
-//Get an array of the comments
-comments = document.getElementById("comments").getElementsByClassName("comment");
+  //Get an array of the comments
+  comments = document.getElementById("comments").getElementsByClassName("comment");
 
-//Iterate through the array of comments
-for (i = 0; i < comments.length; i++) {
-    comment = comments[i];
+  //Iterate through the array of comments
+  for (i = 0; i < comments.length; i++) {
+      comment = comments[i];
 
-    //Initially set thread not hidden
-    hidden[i] = false;
+      //Initially set thread not hidden
+      hidden[i] = false;
 
-    //Creating the new header;
-    header[i] = comment.getElementsByClassName("submitted");
-    header_innerHTML_orig[i] = header[i][0].innerHTML;
+      //Creating the new header;
+      header[i] = comment.getElementsByClassName("submitted");
+      header_innerHTML_orig[i] = header[i][0].innerHTML;
 
-    //Add default button to all comments
-    setHeader(i);
+      //Add default button to all comments
+      setHeader(i);
+      var collapser_activated = true;
+
+  }
 }
 
 function toggleThread(n) {
